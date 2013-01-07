@@ -2,13 +2,13 @@
 
 The property grid control enables the user to modify the properties for an object
 
-![Property Grid](doc/images/property_grid.png)
+![Property Grid](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/property_grid.png)
 
 Each entry in the property grid is a `PropertyItem` grouped under various categories.  The values for each item are displayed in `views`.  Clicking a view will bring up an `editor` to modify it's value.  
 
 To modify the properties of an object, a property model object needs to be defined
 
-Start by importing the project as mentioned in the pub
+Start by importing the project as mentioned in the [pub](http://pub.dartlang.org/packages/property_grid)
 
 Create a property model object for your class / data structure
 
@@ -45,28 +45,29 @@ The possible `editorConfig` for each `editorType` is:
  
 ## Property Views
 
- - **Label View**: Display simple textual values ![Label View](doc/images/view_label.png)
- - **Color View**: Display a color value and its preview ![Label View](doc/images/view_color.png)
+ - **Label View**: Display simple textual values ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/view_label.png)
+ - **Color View**: Display a color value and its preview ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/view_color.png)
 
 ## Property Editors
 
  - **Textbox Editor**: Replaces the view with a textbox and lets the user edit it's contents 
  
- ![Label View](doc/images/editor_textbox.png)
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_textbox.png)
  
  - **Color Editor**: Display a configurable color picker control 
  
- ![Label View](doc/images/editor_color.png)
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_color.png)
 
  - **Spinner**: Display a drop down list
  
- ![Label View](doc/images/editor_spinner.png)
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_spinner.png)
 
 
  - **Slider**: Display a slider to edit numeric values
  
- ![Label View](doc/images/editor_slider.png)
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_slider.png)
 
 
 ## Demo
-View the live demo [here](#)
+
+View the live demo [here](http://htmlpreview.github.com/?https://raw.github.com/coderespawn/dart-property-grid/master/web/demo/sunflower/sunflower.html)
