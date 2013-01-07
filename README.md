@@ -70,4 +70,4 @@ The possible `editorConfig` for each `editorType` is:
 
 ## Demo
 
-View the live demo [here](http://htmlpreview.github.com/?https://raw.github.com/coderespawn/dart-property-grid/master/web/demo/sunflower/sunflower.html)
+View the live demo [here](http://dart-app-samples.appspot.com/)
