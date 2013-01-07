@@ -1,6 +1,6 @@
 # Dart Property Grid
 
-The property grid control enables the user to modify the properties for an object
+The property grid control enables the user to modify the properties of an object
 
 ![Property Grid](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/property_grid.png)
 
