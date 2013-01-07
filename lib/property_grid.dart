@@ -94,10 +94,23 @@ class PropertyGrid {
     categoryRow.classes.add("property-grid-item");
     categoryRow.classes.add("property-grid-category");
     var header = new TableCellElement();
-    header.innerHtml = category;
     header.colSpan = 2;
     categoryRow.nodes.add(header);
+
+    final String cssIconPlus = "property-grid-icon-plus";
+    final String cssIconMinus = "property-grid-icon-minus";
     
+    // Create an icon element to show the expand / collapse state
+    var expandIcon = new DivElement();
+    expandIcon.classes.add("property-grid-category-icon");
+    expandIcon.classes.add(cssIconMinus);
+    header.nodes.add(expandIcon);
+    
+    // Create a div element to place the category text
+    var headerElement = new DivElement();
+    headerElement.innerHtml = category;
+    header.nodes.add(headerElement);
+
     // Add the category body to the grid
     categoryRow.nodes.add(header);
     categoryBody.nodes.add(categoryRow);
@@ -113,9 +126,15 @@ class PropertyGrid {
       String hiddenCss = "property-grid-category-body-hide";
       bool hidden = categoryItemBody.classes.contains(hiddenCss);
       if (hidden) {
+        // Expand
         categoryItemBody.classes.remove(hiddenCss);
+        expandIcon.classes.remove(cssIconPlus);
+        expandIcon.classes.add(cssIconMinus);
       } else {
+        // Collapse
         categoryItemBody.classes.add(hiddenCss);
+        expandIcon.classes.add(cssIconPlus);
+        expandIcon.classes.remove(cssIconMinus);
       }
     });
     

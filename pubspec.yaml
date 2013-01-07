@@ -1,6 +1,10 @@
 name:  property_grid
-description:  A sample application
-
-#dependencies:
-#  js: any
-#  unittest: any
+version: 0.1.0
+description:  >
+  A dart implementation of a .NET like property grid control.  Has support for various 
+  value "views" and "editors" for visualizing and editing the values for property items
+  and is extensible with custom view and editor factories
+author: Ali Akbar Vathi <ali.akbar@gmail.com>
+homepage: https://github.com/coderespawn/dart-color-picker
+dependencies:
+  color_picker: ">=1.0.4 <2.0.0"

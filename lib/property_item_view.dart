@@ -53,6 +53,9 @@ class PropertyItemViewFactory {
     if (type == "label") {
       return new PropertyViewLabel(controller, elementCell);
     } 
+    if (type == "color") {
+      return new PropertyViewColor(controller, elementCell);
+    } 
     else {
       throw new PropertyGridException("Cannot created property item view of type $type");
     }

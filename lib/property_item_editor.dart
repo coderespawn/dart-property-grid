@@ -26,6 +26,9 @@ class PropertyItemEditorFactory {
     else if (type == "spinner") {
       return new PropertyEditorSpinner(controller);
     }
+    else if (type == "color") {
+      return new PropertyEditorColor(controller);
+    }
     else {
       throw new PropertyGridException("Cannot create property item editor of type $type");
     }

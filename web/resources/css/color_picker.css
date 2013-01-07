@@ -1,0 +1,78 @@
+
+/********************** Color Picker ************************/
+.color-picker {
+  margin: 0px;
+  padding: 0px;
+}
+
+.color-picker-hsv-gradient {
+  cursor: crosshair;
+  border: 1px solid black;
+  float: left;
+}
+
+.color-picker-hue-slider {
+  cursor: crosshair;
+  border: 1px solid black;
+  margin-left: 5px;
+  float: left;
+}
+
+.color-picker-info-box {
+  float: left;
+  margin-left: 10px;
+}
+
+.color-picker-preview-base {
+  width: 84px;
+  border: 1px solid #ccc;
+}
+
+.color-picker-preview-previous {
+  width: 100%;
+  height: 32px;
+}
+
+.color-picker-preview-current {
+  width: 100%;
+  height: 32px;
+}
+
+
+/********************** Entry Control ************************/
+.entry-control-base {
+  background-color:#eee;
+  width: 82px;
+  margin: 1px;
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.entry-control-base-name {
+  float: left;
+  width: 15px;
+  margin-top: 4px;
+  margin-left: 5px;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
+
+.entry-control-base-value {
+  width: 55px;
+  clear:both;
+}
+
+/********************** Util ************************/
+.color-picker-unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
