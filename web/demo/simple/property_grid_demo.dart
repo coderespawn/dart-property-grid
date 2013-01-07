@@ -21,7 +21,7 @@ PropertyGridModel _createModel() {
   model.register("Full Name", () => _fullName, (String value) => _fullName = value, 
       "label", "textbox", category: "Info", description: "Name of the person");
 
-  model.register("Age", () => _age, (String value) => _age = int.parse(value), 
+  model.register("Age", () => _age.toString(), (String value) => _age = double.parse(value).toInt(), 
       "label", "slider", category: "Info", description: "Age of the person", editorConfig: [12, 120]);
 
   model.register("Location", () => _location, (String value) => _location = value, 

@@ -28,6 +28,10 @@ class PropertyEditorSpinner extends PropertyItemEditorBase {
         spinner.nodes.add(option);
       }
     }
+    
+    spinner.on.change.add((e) {
+      controller.requestValueChange(spinner.value);
+    });
   }
 
   void showEditor() {

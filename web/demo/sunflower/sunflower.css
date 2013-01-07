@@ -1,0 +1,23 @@
+
+body {
+  background-color: #F8F8F8;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin: 15px;
+}
+
+.sun-view {
+  border: 1px solid black;
+  margin: 0px;
+  padding: 0px;
+}
+
+.sun-property-grid {
+  background-color: #ccc;
+  width: 250px;
+  height: 400px;
+  border: 1px solid #666;
+  float: left;
+}

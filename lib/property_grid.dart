@@ -17,6 +17,7 @@ class PropertyGrid {
   Element elementGridWrapper;
 
   /** The element taht displays the description of an item */
+  Element elementDescriptionWrapper;
   Element elementDescription;
   
   set description(String value) => elementDescription.innerHtml = value;
@@ -54,7 +55,10 @@ class PropertyGrid {
     
     elementDescription = new DivElement();
     elementDescription.classes.add("property-grid-description");
-    elementBase.nodes.add(elementDescription);
+    elementDescriptionWrapper = new DivElement();
+    elementDescriptionWrapper.nodes.add(elementDescription);
+    elementDescriptionWrapper.classes.add("property-grid-description-wrapper");
+    elementBase.nodes.add(elementDescriptionWrapper);
   }
 
   /** Binds the model to the grid */
@@ -77,7 +81,11 @@ class PropertyGrid {
       itemsByCategory[item.category].add(item);
     }
     
-    for (var category in itemsByCategory.keys) {
+    var categoryList = itemsByCategory.keys;
+    if (itemsByCategory.keys.length == model.preferedOrder.length) {
+      categoryList = model.preferedOrder;
+    }
+    for (var category in categoryList) {
       var categoryElement = _insertCategoryElement(category);
       var categoryItems = itemsByCategory[category];
       for (var item in categoryItems) {

@@ -10,6 +10,13 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   InputElement slider;
   bool editing = false;
   
+  /** 
+   * The value that is divided by this number (e.g. if facotr is 10 and 
+   * slider value is 123, returned value would be 12.3
+   */
+  int factor = 1;
+  
+  
   PropertyEditorSlider(PropertyItemController controller) : super(controller)
   {
     slider = new InputElement();
@@ -25,6 +32,9 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         num maxValue = range[1];
         slider.min = minValue.toString();
         slider.max = maxValue.toString();
+        if (range.length >= 3) {
+          factor = range[2];
+        }
       }
     }
     
@@ -46,7 +56,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     elementEditor.style.left = "${left}px";
     elementEditor.style.top = "${top}px";
     elementEditor.style.width = "${width}px";
-    slider.value = controller.model.getValue().toString();
+    _setSliderValue(controller.model.getValue());
     elementEditor.focus();
 
     elementEditor.on.blur.add((e) => _notifyFinishEditing());
@@ -57,7 +67,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         _notifyFinishEditing();
       }
     });
-    slider.on.change.add((e) => controller.requestValueChange(slider.value));
+    slider.on.change.add((e) => controller.requestValueChange(_getSliderValue().toString()));
     editing = true;
   }
   
@@ -69,11 +79,21 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   
   void _notifyFinishEditing() {
     if (editing) {
-      controller.finishEditing(slider.value);
+      controller.finishEditing(_getSliderValue().toString());
     }
   }
   
   void dispose() {
     editing = false;
+  }
+  
+  num _getSliderValue() {
+    num value = int.parse(slider.value);
+    return value / factor;
+  }
+
+  void _setSliderValue(String valueText) {
+    var value = double.parse(valueText);
+    slider.value = (value * factor).toInt().toString();
   }
 }
