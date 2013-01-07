@@ -1,0 +1,34 @@
+part of property_grid;
+
+/** 
+ * Property editors are invoked when a property view is clicked.  It lets 
+ * the user modify the value of the property item
+ */
+abstract class IPropertyItemEditor {
+  void showEditor();
+  void hideEditor();
+  void dispose();
+}
+
+abstract class PropertyItemEditorBase implements IPropertyItemEditor {
+  PropertyItemController controller;
+  PropertyItemEditorBase(this.controller);
+}
+
+class PropertyItemEditorFactory {
+  static IPropertyItemEditor create(PropertyItemController controller, String type, var editorConfig) {
+    if (type == "textbox") {
+      return new PropertyEditorTextbox(controller);
+    }
+    else if (type == "slider") {
+      return new PropertyEditorSlider(controller);
+    }
+    else if (type == "spinner") {
+      return new PropertyEditorSpinner(controller);
+    }
+    else {
+      throw new PropertyGridException("Cannot create property item editor of type $type");
+    }
+  }
+}
+
