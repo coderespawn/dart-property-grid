@@ -15,4 +15,5 @@ part 'editors/editor_textbox.dart';
 part 'utils/property_grid_utils.dart';
 part 'views/view_color.dart';
 part 'views/view_label.dart';
+part 'views/view_browse.dart';
 

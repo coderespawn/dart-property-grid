@@ -28,7 +28,9 @@ class PropertyItemController {
   
   PropertyItemController(this.grid, this.model, this.elementCellName, this.elementCellValue) {
     view = PropertyItemViewFactory.create(this, model.viewType, elementCellValue);
-    editor = PropertyItemEditorFactory.create(this, model.editorType, model.editorConfig);
+    if (model.editorType != null) {
+      editor = PropertyItemEditorFactory.create(this, model.editorType, model.editorConfig);
+    }
     
     elementCellName.on.click.add((e) => grid.onItemSelected(this));
     view.elementView.on.click.add((e) => grid.onItemSelected(this));
@@ -37,10 +39,12 @@ class PropertyItemController {
   void dispose() {
     if (view != null) {
       view.dispose();
+      view = null;
     }
     
     if (editor != null) {
       editor.dispose();
+      editor = null;
     }
   }
   
@@ -71,7 +75,9 @@ class PropertyItemController {
   
   void finishEditing(value) {
     editor.hideEditor();
-    model.setValue(value);
     view.refresh();
+    model.setValue(value);
   }
+  
+  void refreshView() => view.refresh();
 }

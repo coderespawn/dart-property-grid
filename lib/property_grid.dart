@@ -36,8 +36,16 @@ class PropertyGrid {
   PropertyItemController _selectedPropertyItem;
   
   set model(PropertyGridModel value) {
-    _model = value;
-    _bindModel();
+    if (_model == value) {
+      // Same model object reassigned here.  Refresh
+      // the values instead of rebuilding the DOM 
+      refresh();
+    }
+    else {
+      // New property model assignement.  rebuild the DOM
+      _model = value;
+      _bindModel();
+    }
   }
   
   PropertyGrid(this.elementClient) {
@@ -64,6 +72,9 @@ class PropertyGrid {
   /** Binds the model to the grid */
   void _bindModel() {
     // dispose off the existing item controllers
+    if (_selectedPropertyItem != null && _selectedPropertyItem.editor != null) {
+      _selectedPropertyItem.editor.hideEditor();
+    }
     itemControllers.forEach((controller) => controller.dispose());
     itemControllers.clear();
     grid.nodes.clear();
@@ -93,6 +104,12 @@ class PropertyGrid {
       }
     }
     
+  }
+  
+  void refresh() {
+    for (var item in itemControllers) {
+      item.refreshView();
+    }
   }
 
   /** Inserts the category element into the DOM */

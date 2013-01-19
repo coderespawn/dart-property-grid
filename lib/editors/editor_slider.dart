@@ -43,6 +43,16 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     elementEditor.nodes.add(slider);
     elementEditor.classes.add("property-grid-item-editor-slider-host");
     elementEditor.tabIndex = 1;
+
+    elementEditor.on.blur.add((e) => _notifyFinishEditing());
+    elementEditor.on.keyDown.add((KeyboardEvent e) {
+      // Complete the editing if the Return key was pressed
+      const int KEY_ENTER = 13;
+      if (e.keyCode == KEY_ENTER) {
+        _notifyFinishEditing();
+      }
+    });
+    slider.on.change.add((e) => controller.requestValueChange(_getSliderValue().toString()));
   }
 
   void showEditor() {
@@ -59,15 +69,6 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     _setSliderValue(controller.model.getValue());
     elementEditor.focus();
 
-    elementEditor.on.blur.add((e) => _notifyFinishEditing());
-    elementEditor.on.keyDown.add((KeyboardEvent e) {
-      // Complete the editing if the Return key was pressed
-      const int KEY_ENTER = 13;
-      if (e.keyCode == KEY_ENTER) {
-        _notifyFinishEditing();
-      }
-    });
-    slider.on.change.add((e) => controller.requestValueChange(_getSliderValue().toString()));
     editing = true;
   }
   
@@ -88,7 +89,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   }
   
   num _getSliderValue() {
-    num value = int.parse(slider.value);
+    num value = int.parse(slider.value.toString());
     return value / factor;
   }
 

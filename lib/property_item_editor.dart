@@ -17,7 +17,10 @@ abstract class PropertyItemEditorBase implements IPropertyItemEditor {
 
 class PropertyItemEditorFactory {
   static IPropertyItemEditor create(PropertyItemController controller, String type, var editorConfig) {
-    if (type == "textbox") {
+    if (type == null) {
+      return new DummyPropertyItemEditor();
+    }
+    else if (type == "textbox") {
       return new PropertyEditorTextbox(controller);
     }
     else if (type == "slider") {
@@ -35,3 +38,9 @@ class PropertyItemEditorFactory {
   }
 }
 
+/** Use this if no editor is required */
+class DummyPropertyItemEditor implements IPropertyItemEditor {
+  void showEditor() {}
+  void hideEditor() {}
+  void dispose() {}
+}
