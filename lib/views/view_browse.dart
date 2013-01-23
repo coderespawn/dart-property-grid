@@ -25,8 +25,6 @@ class PropertyViewBrowse extends PropertyItemViewBase {
     btnBrowse = new InputElement();
     btnBrowse.type = "file";
     elementBrowseContainer.nodes.add(btnBrowse);
-//    btnBrowse.value = "...";
-//    btnBrowse.on.click.add((e) => onBrowseClicked());
 
     elementBrowseText = new DivElement();
     elementBrowseText.classes.add("property-grid-item-view-browse-text");

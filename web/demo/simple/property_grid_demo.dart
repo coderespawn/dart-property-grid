@@ -1,7 +1,7 @@
 library main;
 
 import 'dart:html';
-import 'package:property_grid/property_grid_lib.dart';
+import 'package:property_grid/property_grid.dart';
 
 String _fullName = "Ali Akbar";
 int _age = 30;

@@ -18,8 +18,8 @@ class PropertyEditorTextbox extends PropertyItemEditorBase {
     textbox.value = controller.model.getValue().toString();
     textbox.focus();
 
-    textbox.on.blur.add((e) => _notifyFinishEditing());
-    textbox.on.keyDown.add((KeyboardEvent e) {
+    textbox.onBlur.listen((e) => _notifyFinishEditing());
+    textbox.onKeyDown.listen((KeyboardEvent e) {
       // Complete the editing if the Return key was pressed
       const int KEY_ENTER = 13;
       if (e.keyCode == KEY_ENTER) {

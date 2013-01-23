@@ -22,7 +22,7 @@ abstract class PropertyItemViewBase implements IPropertyItemView {
   Element elementCell;
   Element elementView;
 
-  var _handlerOnClick;
+  StreamSubscription _onClickSubscription;
   PropertyItemViewBase(this.controller, this.elementCell);
   
   void _initialize() {
@@ -30,12 +30,11 @@ abstract class PropertyItemViewBase implements IPropertyItemView {
       throw new Exception("View element has not been created yet");
     }
     
-    _handlerOnClick = _onMouseClick;
-    elementView.on.click.add(_handlerOnClick);
+    _onClickSubscription = elementView.onClick.listen(_onMouseClick);
   }
   
   void dispose() {
-    elementView.on.click.remove(_handlerOnClick);
+    _onClickSubscription.cancel();
     elementView.remove();
     elementView = null;
   }

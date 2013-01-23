@@ -8,7 +8,7 @@ library sunflower;
 
 import 'dart:html';
 import 'dart:math';
-import 'package:property_grid/property_grid_lib.dart';
+import 'package:property_grid/property_grid.dart';
 
 const TAU = PI * 2;
 

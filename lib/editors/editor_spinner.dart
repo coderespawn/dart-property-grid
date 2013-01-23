@@ -29,7 +29,7 @@ class PropertyEditorSpinner extends PropertyItemEditorBase {
       }
     }
     
-    spinner.on.change.add((e) {
+    spinner.onChange.listen((e) {
       controller.requestValueChange(spinner.value);
     });
   }
@@ -42,8 +42,8 @@ class PropertyEditorSpinner extends PropertyItemEditorBase {
     spinner.value = controller.model.getValue().toString();
     spinner.focus();
 
-    spinner.on.blur.add((e) => _notifyFinishEditing());
-    spinner.on.keyDown.add((KeyboardEvent e) {
+    spinner.onBlur.listen((e) => _notifyFinishEditing());
+    spinner.onKeyDown.listen((KeyboardEvent e) {
       // Complete the editing if the Return key was pressed
       const int KEY_ENTER = 13;
       if (e.keyCode == KEY_ENTER) {

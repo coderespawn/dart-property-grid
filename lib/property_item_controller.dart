@@ -32,8 +32,8 @@ class PropertyItemController {
       editor = PropertyItemEditorFactory.create(this, model.editorType, model.editorConfig);
     }
     
-    elementCellName.on.click.add((e) => grid.onItemSelected(this));
-    view.elementView.on.click.add((e) => grid.onItemSelected(this));
+    elementCellName.onClick.listen((e) => grid.onItemSelected(this));
+    view.elementView.onClick.listen((e) => grid.onItemSelected(this));
   }
   
   void dispose() {
@@ -71,6 +71,7 @@ class PropertyItemController {
   void requestValueChange(value) {
     model.setValue(value);
     view.refresh();
+    grid.onPropertyChanged(this);
   }
   
   void finishEditing(value) {

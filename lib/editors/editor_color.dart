@@ -55,8 +55,8 @@ class PropertyEditorColor extends PropertyItemEditorBase {
     colorPicker.picker.color = initialColor;
     colorPicker.hueSlider.hueAngle = colorPicker.picker.hue;
     
-    elementEditor.on.blur.add((e) => _notifyFinishEditing());
-    elementEditor.on.keyDown.add((KeyboardEvent e) {
+    elementEditor.onBlur.listen((e) => _notifyFinishEditing());
+    elementEditor.onKeyDown.listen((KeyboardEvent e) {
       // Complete the editing if the Return key was pressed
       const int KEY_ENTER = 13;
       if (e.keyCode == KEY_ENTER) {
