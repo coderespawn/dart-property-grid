@@ -34,6 +34,14 @@ class PropertyGrid {
   /** Controllers for each item created for the current model */
   List<PropertyItemController> itemControllers = new List<PropertyItemController>();
   
+  PropertyItemController get(String name) {
+    var items = itemControllers.where((item) => item.model.name == name).toList();
+    if (items.length == 0) {
+      throw new ArgumentError("Cannot find item with the name: $name");
+    }
+    return items[0];
+  }
+   
   /** 
    * The currently selected item in the property grid.  This item would be 
    * highlighted and it's description would be shown 
