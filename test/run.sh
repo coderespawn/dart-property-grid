@@ -5,8 +5,8 @@ set -e
 #####
 # Unit Tests
 
-echo "DumpRenderTree test/index.html"
-results=`DumpRenderTree test/index.html 2>&1`
+echo "DumpRenderTree test/test_runner.html"
+results=`DumpRenderTree test/test_runner.html 2>&1`
 
 echo "$results" | grep CONSOLE
 
