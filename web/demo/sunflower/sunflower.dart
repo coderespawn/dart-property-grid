@@ -47,6 +47,7 @@ var sunflowerProperties = createSunflowerBinding();
 
 
 main() {
+  _initState();
   var propertyGrid = new PropertyGrid(query("#my_property_grid"));
   propertyGrid.model = sunflowerProperties;
 
@@ -57,6 +58,10 @@ main() {
   drawFrame(context);
 }
 
+_initState() {
+  // Create an initial gradient color
+  
+}
 /**
  * Draw the complete figure for the current number of seeds.
  */

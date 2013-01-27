@@ -13,6 +13,8 @@ abstract class IPropertyItemEditor {
 abstract class PropertyItemEditorBase implements IPropertyItemEditor {
   PropertyItemController controller;
   PropertyItemEditorBase(this.controller);
+  
+  int get gridScrollTop => controller.grid.elementGridWrapper.scrollTop;
 }
 
 class PropertyItemEditorFactory {

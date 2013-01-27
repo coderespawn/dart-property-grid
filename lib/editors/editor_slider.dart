@@ -65,7 +65,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     document.body.nodes.add(elementEditor);
     
     int left = _getElementPageLeft(cell);
-    int top = _getElementPageTop(cell) + controller.view.elementView.clientHeight;
+    int top = _getElementPageTop(cell) + controller.view.elementView.clientHeight - gridScrollTop;
     
     int width = cell.clientWidth;
     elementEditor.style.left = "${left}px";

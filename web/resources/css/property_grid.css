@@ -11,19 +11,17 @@
 }
 
 .property-grid-wrapper {
-  min-height: 100%;
-  height:     auto !important;
   height:     100%;
-  margin:     0 auto -60px; /* -44px being the size of the description field */
   background-color:#888;
+  overflow-y: auto;
 }
 
 /** The grid table theme */
 .property-grid {
   width: 100%;
-  height: 100%;
   background-color:#fff;
   border-collapse: collapse;
+  overflow-y: scroll;
 }
 
 .property-grid-description-wrapper {
@@ -34,7 +32,6 @@
 .property-grid-description {
   padding: 8px;
 }
-
 
 .property-grid-item {
   border: 1px solid #ccc;
@@ -115,6 +112,7 @@
 
 .property-grid-item-view-gradient-preview {
   height: 14px;
+  width: 100px;
   background-color: #f00;
   padding: 0px;
   border: 1px solid black;

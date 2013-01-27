@@ -80,6 +80,18 @@ class PropertyGrid {
     elementDescriptionWrapper.nodes.add(elementDescription);
     elementDescriptionWrapper.classes.add("property-grid-description-wrapper");
     elementBase.nodes.add(elementDescriptionWrapper);
+    
+    resize();
+  }
+  
+  void resize() {
+    final width = elementClient.clientWidth;
+    final height = elementClient.clientHeight;
+    
+    final descriptionHeight = elementDescriptionWrapper.clientHeight;
+    final gridHeight = height - descriptionHeight;
+    
+    elementGridWrapper.style.height = "${gridHeight}px";
   }
 
   /** Binds the model to the grid */

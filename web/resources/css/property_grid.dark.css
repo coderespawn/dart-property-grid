@@ -1,0 +1,123 @@
+
+.property-grid-base {  
+}
+
+.property-grid-wrapper {
+  background-color:#444;
+}
+
+/** The grid table theme */
+.property-grid {
+  background-color:#fff;
+}
+
+.property-grid-description-wrapper {
+  color: orange;
+  background-color: #111;
+  border-top: 1px solid #000;
+  margin-top: -1px;
+}
+
+.property-grid-description {
+}
+
+.property-grid-item {
+  border: 1px solid #222;
+}
+
+.property-grid-category {
+  background-color: orange;
+}
+
+.property-grid-category-body {
+}
+
+.property-grid-category-body-hide {
+}
+
+.property-grid-item-name {
+  color: #ccc;
+  background-color: #333;
+  border: 1px solid #222;
+}
+
+.property-grid-item-name-text {
+}
+
+.property-grid-item-name-selected {
+  color: #000;
+  background-color: orange;
+}
+
+.property-grid-item-value {
+  background-color: #111;
+  color: orange;
+}
+
+/************************* VIEWS ****************************/
+.property-grid-item-view-label {
+}
+
+.property-grid-item-view-color-base {
+}
+
+.property-grid-item-view-color-text {
+}
+
+.property-grid-item-view-color-preview {
+  border: 1px solid #333;
+}
+
+
+.property-grid-item-view-gradient-base {
+}
+
+.property-grid-item-view-gradient-preview {
+}
+
+
+/************************* EDITORS ****************************/
+.property-grid-item-editor-textbox {
+}
+
+.property-grid-item-editor-slider {
+}
+
+.property-grid-item-editor-slider-host {
+  background-color: #333;
+  color: orange;
+  border: 1px solid #000;
+}
+
+.property-grid-item-editor-spinner {
+}
+
+.property-grid-item-editor-color-picker-host {
+  background-color: #333;
+  border: 1px solid #000;
+}
+
+.property-grid-item-editor-color-picker {
+}
+
+
+.property-grid-item-editor-browse-host {
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+.property-grid-item-editor-browse {
+}
+
+
+/************************* Icons ****************************/
+.property-grid-category-icon {
+}
+
+.property-grid-icon-plus {
+  background-image:url('../images/icon_plus.png');
+}
+
+.property-grid-icon-minus {
+  background-image:url('../images/icon_minus.png');
+}

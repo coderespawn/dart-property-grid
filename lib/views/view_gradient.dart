@@ -23,6 +23,7 @@ class PropertyViewGradient extends PropertyItemViewBase {
   void refresh() {
     // Set the text
     GradientValue value = controller.model.getValue();
+    gradientPreview.style.width = "${elementView.clientWidth - 10}px";
     gradientPreview.width = gradientPreview.clientWidth;
     gradientPreview.height = gradientPreview.clientHeight;
     
