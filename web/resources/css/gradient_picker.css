@@ -1,0 +1,25 @@
+
+.gradient-picker-base {
+  padding: 10px;
+  display: block;
+  line-height: 1px;
+  border: 1px solid black;
+}
+
+.gradient-picker-colorbar {
+  border: 1px solid black;
+  margin-top: -1px;
+  margin-left: -1px;
+}
+
+.gradient-picker-handlebar {
+  margin-left: -5px;
+}
+
+.gradient-picker-color-picker {
+  border: 1px solid black;
+  width: 144px;
+  margin-top: 10px;
+  margin-left: 16px;
+  display: none;
+}

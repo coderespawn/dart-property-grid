@@ -106,27 +106,21 @@
   float: right;
 }
 
-.property-grid-item-view-browse-base {
+
+.property-grid-item-view-gradient-base {
   width: 100%;
   height: 20px;
   overflow: hidden;
 }
 
-.property-grid-item-view-browse-text {
-  height: 20px;
-  width: auto;
-  overflow: hidden;
-  display: inline;
+.property-grid-item-view-gradient-preview {
+  height: 14px;
+  background-color: #f00;
+  padding: 0px;
+  border: 1px solid black;
+  margin: 2px;
 }
 
-.property-grid-item-view-browse-button {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  margin: 2px;
-  margin-top: 0px;
-  float: right;
-}
 
 /************************* EDITORS ****************************/
 .property-grid-item-editor-textbox {
@@ -169,6 +163,24 @@
 
 .property-grid-item-editor-color-picker {
   margin: 5px;
+}
+
+
+.property-grid-item-editor-browse-host {
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+.property-grid-item-editor-browse {
+  height: 30px;
+  width: auto;
+  overflow: hidden;
+  display: inline;
+  margin: 3px 0 0 3px;
 }
 
 

@@ -1,6 +1,6 @@
 part of property_grid;
 
-typedef PropertyItemSetter(String value);
+typedef PropertyItemSetter(value);
 typedef PropertyItemGetter();
 
 /** 

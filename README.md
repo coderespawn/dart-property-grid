@@ -70,4 +70,4 @@ The possible `editorConfig` for each `editorType` is:
 
 ## Demo
 
-View the live demo [here](http://dart-app-samples.appspot.com/)
+View the live demo [here](http://dart-app-samples.appspot.com/demos/dart-property-grid/index.html)

@@ -54,10 +54,10 @@ class PropertyItemViewFactory {
     } 
     else if (type == "color") {
       return new PropertyViewColor(controller, elementCell);
-    } 
-    else if (type == "browse") {
-      return new PropertyViewBrowse(controller, elementCell);
-    } 
+    }
+    else if (type == "gradient") {
+      return new PropertyViewGradient(controller, elementCell);
+    }
     else {
       throw new PropertyGridException("Cannot created property item view of type $type");
     }

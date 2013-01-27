@@ -76,8 +76,8 @@ class PropertyItemController {
   
   void finishEditing(value) {
     editor.hideEditor();
-    view.refresh();
     model.setValue(value);
+    view.refresh();
   }
   
   void refreshView() => view.refresh();

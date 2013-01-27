@@ -52,7 +52,12 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         _notifyFinishEditing();
       }
     });
-    slider.onChange.listen((e) => controller.requestValueChange(_getSliderValue().toString()));
+    slider.onChange.listen((e) {
+      num value =  _getSliderValue();
+      if (value != null) {
+        controller.requestValueChange(value.toString());
+      }
+    });
   }
 
   void showEditor() {
@@ -80,7 +85,10 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   
   void _notifyFinishEditing() {
     if (editing) {
-      controller.finishEditing(_getSliderValue().toString());
+      num value =  _getSliderValue();
+      if (value != null) {
+        controller.finishEditing(value.toString());
+      }
     }
   }
   
@@ -90,6 +98,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   
   num _getSliderValue() {
     try {
+      if (slider.value == null) return null;
       num value = int.parse(slider.value.toString());
       return value / factor;
     } on Exception catch (e) {

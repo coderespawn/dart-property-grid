@@ -9,6 +9,7 @@ library sunflower;
 import 'dart:html';
 import 'dart:math';
 import 'package:property_grid/property_grid.dart';
+import 'package:gradient_picker/gradient_picker.dart';  // Needed only if GradientValue data structure is used
 
 const TAU = PI * 2;
 
@@ -21,13 +22,16 @@ int seeds = 500;
 num scaleFactor = 4;
 num phiIndex = 5;
 
-// Appearence related paraemters
+// Appearence related parameters
 String title = "Sunflower";
 num seedRadius = 3;
 SunColor seedColor = new SunColor(32, 255, 192);
 SunColor strokeColor = new SunColor(35, 54, 157);
 num seedStrokeWidth = 1.5;
 String seedType = "Circle";
+File background;
+ImageElement backgroundImage;
+GradientValue flowerGradient = new GradientValue();
 
 // Misc parameters
 num centerX = MAX_D / 2;
@@ -59,6 +63,15 @@ main() {
 void drawFrame(CanvasRenderingContext2D context) {
   context.clearRect(0, 0, MAX_D, MAX_D);
 
+  // Draw the background, if specified
+  if (backgroundImage != null) {
+    context.save();
+    context.fillStyle = "transparent";
+    context.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 
+        0, 0, context.canvas.width, context.canvas.height);
+    context.restore();
+  }
+  
   // draw the title
   context.save();
   context.fillStyle = "black";
@@ -143,6 +156,12 @@ PropertyGridModel createSunflowerBinding() {
   model.register("Seed Type", () => seedType, (String value) { seedType = value; drawFrame(context); }, 
       "label", "spinner", category: "Appearence", description: "The seed's shape type", editorConfig: _getShapeTypes);
 
+  model.register("Background", () => background == null ? "" : background.name, (File value) => _createImage(value), 
+      "label", "browse", category: "Appearence", description: "The background image");
+
+  model.register("Gradient", () => flowerGradient, (GradientValue value) { flowerGradient = value; drawFrame(context); }, 
+      "gradient", "browse", category: "Appearence", description: "The flower's gradient color");
+
   // Misc bindings
   model.register("Center X", () => centerX.toString(), (String value) { centerX = double.parse(value).toInt(); drawFrame(context); }, 
       "label", "slider", category: "Misc", description: "Sunflower's center (x-axis)", editorConfig: [0, 400]);
@@ -150,11 +169,20 @@ PropertyGridModel createSunflowerBinding() {
   model.register("Center Y", () => centerY.toString(), (String value) { centerY = double.parse(value).toInt(); drawFrame(context); }, 
       "label", "slider", category: "Misc", description: "Sunflower's center (y-axis)", editorConfig: [0, 400]);
 
-  
   return model;
 }
 
 _getShapeTypes() => ["Seeds", "Circle", "Drops"];
+
+void _createImage(File _background) {
+  if (_background == null) return;
+  background = _background;
+  backgroundImage = new ImageElement();
+  print (background);
+  print (Url.createObjectUrl(background));
+  backgroundImage.onLoad.listen((e) => drawFrame(context));
+  backgroundImage.src = Url.createObjectUrl(background);
+}
 
 /** Custom color class that will be used with the property grid */
 class SunColor {

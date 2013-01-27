@@ -32,6 +32,9 @@ class PropertyItemEditorFactory {
     else if (type == "color") {
       return new PropertyEditorColor(controller);
     }
+    else if (type == "browse") {
+      return new PropertyEditorBrowse(controller);
+    }
     else {
       throw new PropertyGridException("Cannot create property item editor of type $type");
     }

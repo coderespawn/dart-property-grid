@@ -34,8 +34,8 @@ PropertyGridModel _createModel() {
   model.register("Color", () => _color.toString(), (String value) => _color = new Color.parse(value), 
       "color", "color", category: "Preference", description: "The user's prefered color", editorConfig: 128 /* size of color picker */);
   
-  model.register("Filename", () => _filename, (String value) => _filename = value, 
-      "browse", null, category: "Info", description: "test Filename");
+  model.register("Filename", () => _filename, (File value) => _filename = value.name, 
+      "label", "browse", category: "Info", description: "test Filename");
   
   return model;
 }
