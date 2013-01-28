@@ -76,7 +76,7 @@ The possible `editorConfig` for each `editorType` is:
  
  ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_gradient.png)
 
- - **File Upload Editor**: Display a File Upload button.  The choosing a file, the Html5 File object would be returned 
+ - **File Upload Editor**: Display a File Upload button.  On selecting a file, the Html5 File object would be returned 
  
  ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_browse.png)
 
