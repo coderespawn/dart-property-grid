@@ -1,5 +1,6 @@
 part of property_grid;
 
+
 class PropertyGridModel {
   /** The items of the property grid */
   List<PropertyItem> items = new List<PropertyItem>();
