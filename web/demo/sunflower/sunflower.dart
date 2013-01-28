@@ -158,9 +158,9 @@ PropertyGridModel createSunflowerBinding() {
   model.register("Seed Radius", () => seedRadius.toString(), (String value) { seedRadius = double.parse(value); drawFrame(context); }, 
       "label", "slider", category: "Appearence", description: "The seed radius", editorConfig: [100, 600, 100]);
 
-  model.register("Seed Color", () => seedColor.toString(), (String value) { seedColor = new SunColor.parse(value); drawFrame(context); }, 
-      "color", "color", category: "Appearence", description: "The seed color", editorConfig: 128 /* size of color picker */);
-  
+  model.register("Flower Color", () => flowerGradient, (GradientValue value) { flowerGradient = value; drawFrame(context); }, 
+      "gradient", "gradient", category: "Appearence", description: "The flower's gradient color");
+
   model.register("Stroke Size", () => seedStrokeWidth.toString(), (String value) { seedStrokeWidth = double.parse(value); drawFrame(context); }, 
       "label", "slider", category: "Appearence", description: "The seed's stroke width", editorConfig: [100, 6000, 1000]);
 
@@ -172,9 +172,6 @@ PropertyGridModel createSunflowerBinding() {
 
   model.register("Background", () => background == null ? "" : background.name, (File value) => _createImage(value), 
       "label", "browse", category: "Appearence", description: "The background image");
-
-  model.register("Gradient", () => flowerGradient, (GradientValue value) { flowerGradient = value; drawFrame(context); }, 
-      "gradient", "gradient", category: "Appearence", description: "The flower's gradient color");
 
   // Misc bindings
   model.register("Center X", () => centerX.toString(), (String value) { centerX = double.parse(value).toInt(); drawFrame(context); }, 

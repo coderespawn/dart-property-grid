@@ -1,6 +1,7 @@
 part of property_grid;
 
-typedef void PropertyChangeListener(PropertyGrid propertyGrid, PropertyItemController property);
+typedef void PropertyChangeEvent(PropertyItemController property);
+typedef void PropertyEditCompleteEvent(PropertyItemController property, dynamic originalValue, dynamic newValue);
 
 class PropertyGrid {
   /** 
@@ -23,7 +24,10 @@ class PropertyGrid {
   Element elementDescription;
   
   /** Listener for property value change events */
-  PropertyChangeListener propertyChangeListener;
+  PropertyChangeEvent propertyChangeEvent;
+
+  /** Listener for property value change events. Fired when the value editing is done */
+  PropertyEditCompleteEvent propertyEditCompleteEvent;
   
   set description(String value) => elementDescription.innerHtml = value;
   
@@ -144,8 +148,8 @@ class PropertyGrid {
   
   /** Whenever a property value is changed, this function is invoked */
   void onPropertyChanged(PropertyItemController item) {
-    if (propertyChangeListener != null) {
-      propertyChangeListener(this, item);
+    if (propertyChangeEvent != null) {
+      propertyChangeEvent(item);
     }
   }
 
@@ -250,6 +254,12 @@ class PropertyGrid {
     _selectedPropertyItem = controller;
     elementDescription.innerHtml = controller.model.description;
     controller.setSelected(true);
+  }
+  
+  void _notifyPropertyEditComplete(PropertyItemController property, dynamic originalValue, dynamic newValue) {
+    if (propertyEditCompleteEvent != null) {
+      propertyEditCompleteEvent(property, originalValue, newValue);
+    }
   }
 }
 

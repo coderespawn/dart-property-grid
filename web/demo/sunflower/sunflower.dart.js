@@ -516,7 +516,7 @@ $$._HashMapImpl = {"": "Object;_keys>,_values>,_loadLimit,_numberOfEntries,_numb
     for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
       t1 = this._keys;
       if (typeof t1 !== "string" && (typeof t1 !== "object" || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-        return this._probeForAdding$1$bailout(3, insertionIndex, key, t1, hash, numberOfProbes);
+        return this._probeForAdding$1$bailout(3, key, insertionIndex, t1, hash, numberOfProbes);
       if (hash < 0 || hash >= t1.length)
         throw $.ioore(hash);
       existingKey = t1[hash];
@@ -550,8 +550,8 @@ $$._HashMapImpl = {"": "Object;_keys>,_values>,_loadLimit,_numberOfEntries,_numb
         numberOfProbes = env4;
         hash = env3;
         t1 = env2;
-        key = env1;
-        insertionIndex = env0;
+        insertionIndex = env1;
+        key = env0;
         break;
       case 4:
         insertionIndex = env3;
@@ -4642,9 +4642,12 @@ $$._AttributeClassSet = {"": "CssClassSet;_liblib4$_element",
   }
 };
 
-$$.PropertyGrid = {"": "Object;elementClient,elementBase>,grid>,elementGridWrapper>,elementDescriptionWrapper,elementDescription,propertyChangeListener,_model,itemControllers,_selectedPropertyItem",
-  propertyChangeListener$2: function(arg0, arg1) {
-    return this.propertyChangeListener.call$2(arg0, arg1);
+$$.PropertyGrid = {"": "Object;elementClient,elementBase>,grid>,elementGridWrapper>,elementDescriptionWrapper,elementDescription,propertyChangeEvent,propertyEditCompleteEvent,_model,itemControllers,_selectedPropertyItem",
+  propertyChangeEvent$1: function(arg0) {
+    return this.propertyChangeEvent.call$1(arg0);
+  },
+  propertyEditCompleteEvent$3: function(arg0, arg1, arg2) {
+    return this.propertyEditCompleteEvent.call$3(arg0, arg1, arg2);
   },
   set$description: function(value) {
     this.elementDescription.set$innerHtml(value);
@@ -4759,8 +4762,8 @@ $$.PropertyGrid = {"": "Object;elementClient,elementBase>,grid>,elementGridWrapp
     $.CONSTANT3.forEach$1(t1, new $.PropertyGrid_refresh_anon());
   },
   onPropertyChanged$1: function(item) {
-    if (!(this.propertyChangeListener == null))
-      this.propertyChangeListener$2(this, item);
+    if (!(this.propertyChangeEvent == null))
+      this.propertyChangeEvent$1(item);
   },
   _insertCategoryElement$1: function(category) {
     var categoryBody, categoryRow, t1, header, expandIcon, headerElement, categoryItemBody;
@@ -4842,6 +4845,13 @@ $$.PropertyGrid = {"": "Object;elementClient,elementBase>,grid>,elementGridWrapp
     this.elementDescription.set$innerHtml(t1);
     controller.setSelected$1(true);
   },
+  _notifyPropertyEditComplete$3: function(property, originalValue, newValue) {
+    if (!(this.propertyEditCompleteEvent == null))
+      this.propertyEditCompleteEvent$3(property, originalValue, newValue);
+  },
+  get$_notifyPropertyEditComplete: function() {
+    return new $.BoundClosure2(this, "_notifyPropertyEditComplete$3");
+  },
   PropertyGrid$1: function(elementClient) {
     var t1, t2;
     this.elementBase = $.DivElement_DivElement();
@@ -4911,7 +4921,7 @@ $$.PropertyItem = {"": "Object;name>,getValue,setValue,editorType>,editorConfig>
   }
 };
 
-$$.PropertyItemController = {"": "Object;grid>,model>,view>,editor>,elementCellName,elementCellValue>,selected<,selectedCssClass",
+$$.PropertyItemController = {"": "Object;grid>,model>,view>,editor>,elementCellName,elementCellValue>,selected<,selectedCssClass,valueBeforeEdit",
   dispose$0: function() {
     var t1 = this.view;
     if (!(t1 == null)) {
@@ -4923,11 +4933,6 @@ $$.PropertyItemController = {"": "Object;grid>,model>,view>,editor>,elementCellN
       t1.dispose$0();
       this.editor = null;
     }
-  },
-  onViewClicked$0: function() {
-    var t1 = this.editor;
-    if (!(t1 == null))
-      t1.showEditor$0();
   },
   setSelected$1: function(selected) {
     var t1, t2;
@@ -4951,10 +4956,21 @@ $$.PropertyItemController = {"": "Object;grid>,model>,view>,editor>,elementCellN
     this.view.refresh$0();
     this.grid.onPropertyChanged$1(this);
   },
+  onViewClicked$0: function() {
+    if (!(this.editor == null)) {
+      this.valueBeforeEdit = this.model.getValue$0();
+      this.editor.showEditor$0();
+    }
+  },
   finishEditing$1: function(value) {
+    var newValue;
     this.editor.hideEditor$0();
     this.model.setValue$1(value);
     this.view.refresh$0();
+    if (!(this.grid.get$_notifyPropertyEditComplete() == null)) {
+      newValue = this.model.getValue$0();
+      this.grid._notifyPropertyEditComplete$3(this, this.valueBeforeEdit, newValue);
+    }
   },
   refreshView$0: function() {
     return this.view.refresh$0();
@@ -5793,7 +5809,7 @@ $$.GradientPicker = {"": "Object;gradient=,width=,height=,elementBase>,elementCo
     }
   },
   get$_onColorChanged: function() {
-    return new $.BoundClosure2(this, "_onColorChanged$4");
+    return new $.BoundClosure3(this, "_onColorChanged$4");
   },
   _notifyGradientChanged$0: function() {
     if (!(this.gradientChanged == null))
@@ -6184,7 +6200,7 @@ $$.ColorPicker = {"": "Object;element>,initialColor,picker>,hueSlider>,infoBox,_
       this._colorChangeListener.call$4(color, hue, saturation, brightness);
   },
   get$onColorChanged: function() {
-    return new $.BoundClosure2(this, "onColorChanged$4");
+    return new $.BoundClosure3(this, "onColorChanged$4");
   },
   dispose$0: function() {
     this.element.remove$0();
@@ -7182,14 +7198,13 @@ $$.createSunflowerBinding_anon8 = {"": "Closure;",
 
 $$.createSunflowerBinding_anon9 = {"": "Closure;",
   call$0: function() {
-    var t1 = $.get$seedColor();
-    return $.getInterceptor(t1).toString$0(t1);
+    return $.get$flowerGradient();
   }
 };
 
 $$.createSunflowerBinding_anon10 = {"": "Closure;",
   call$1: function(value) {
-    $.seedColor = $.SunColor$parse(value);
+    $.flowerGradient = value;
     $.drawFrame($.context);
   }
 };
@@ -7250,25 +7265,12 @@ $$.createSunflowerBinding_anon18 = {"": "Closure;",
 
 $$.createSunflowerBinding_anon19 = {"": "Closure;",
   call$0: function() {
-    return $.get$flowerGradient();
-  }
-};
-
-$$.createSunflowerBinding_anon20 = {"": "Closure;",
-  call$1: function(value) {
-    $.flowerGradient = value;
-    $.drawFrame($.context);
-  }
-};
-
-$$.createSunflowerBinding_anon21 = {"": "Closure;",
-  call$0: function() {
     var t1 = $.centerX;
     return $.getInterceptor(t1).toString$0(t1);
   }
 };
 
-$$.createSunflowerBinding_anon22 = {"": "Closure;",
+$$.createSunflowerBinding_anon20 = {"": "Closure;",
   call$1: function(value) {
     var t1 = $.double_parse(value, null);
     $.centerX = $.getInterceptor$JSNumber(t1).toInt$0(t1);
@@ -7276,14 +7278,14 @@ $$.createSunflowerBinding_anon22 = {"": "Closure;",
   }
 };
 
-$$.createSunflowerBinding_anon23 = {"": "Closure;",
+$$.createSunflowerBinding_anon21 = {"": "Closure;",
   call$0: function() {
     var t1 = $.centerY;
     return $.getInterceptor(t1).toString$0(t1);
   }
 };
 
-$$.createSunflowerBinding_anon24 = {"": "Closure;",
+$$.createSunflowerBinding_anon22 = {"": "Closure;",
   call$1: function(value) {
     var t1 = $.double_parse(value, null);
     $.centerY = $.getInterceptor$JSNumber(t1).toInt$0(t1);
@@ -8313,6 +8315,11 @@ $$.BoundClosure1 = {"": "Closure;self,target",
   }
 };
 $$.BoundClosure2 = {"": "Closure;self,target",
+  call$3: function(p0, p1, p2) {
+    return this.self[this.target](p0, p1, p2);
+  }
+};
+$$.BoundClosure3 = {"": "Closure;self,target",
   call$4: function(p0, p1, p2, p3) {
     return this.self[this.target](p0, p1, p2, p3);
   }
@@ -11263,14 +11270,13 @@ $.createSunflowerBinding = function() {
   model.register$8$category$description$editorConfig("Scale Factor", new $.createSunflowerBinding_anon3(), new $.createSunflowerBinding_anon4(), "label", "slider", "Algorithm", "The Scale Factor", [300, 800, 100]);
   model.register$7$category$description("Title", new $.createSunflowerBinding_anon5(), new $.createSunflowerBinding_anon6(), "label", "textbox", "Appearence", "Caption shown on the top");
   model.register$8$category$description$editorConfig("Seed Radius", new $.createSunflowerBinding_anon7(), new $.createSunflowerBinding_anon8(), "label", "slider", "Appearence", "The seed radius", [100, 600, 100]);
-  model.register$8$category$description$editorConfig("Seed Color", new $.createSunflowerBinding_anon9(), new $.createSunflowerBinding_anon10(), "color", "color", "Appearence", "The seed color", 128);
+  model.register$7$category$description("Flower Color", new $.createSunflowerBinding_anon9(), new $.createSunflowerBinding_anon10(), "gradient", "gradient", "Appearence", "The flower's gradient color");
   model.register$8$category$description$editorConfig("Stroke Size", new $.createSunflowerBinding_anon11(), new $.createSunflowerBinding_anon12(), "label", "slider", "Appearence", "The seed's stroke width", [100, 6000, 1000]);
   model.register$8$category$description$editorConfig("Stroke Color", new $.createSunflowerBinding_anon13(), new $.createSunflowerBinding_anon14(), "color", "color", "Appearence", "The seed's stroke color", 128);
   model.register$8$category$description$editorConfig("Seed Type", new $.createSunflowerBinding_anon15(), new $.createSunflowerBinding_anon16(), "label", "spinner", "Appearence", "The seed's shape type", $._getShapeTypes);
   model.register$7$category$description("Background", new $.createSunflowerBinding_anon17(), new $.createSunflowerBinding_anon18(), "label", "browse", "Appearence", "The background image");
-  model.register$7$category$description("Gradient", new $.createSunflowerBinding_anon19(), new $.createSunflowerBinding_anon20(), "gradient", "gradient", "Appearence", "The flower's gradient color");
-  model.register$8$category$description$editorConfig("Center X", new $.createSunflowerBinding_anon21(), new $.createSunflowerBinding_anon22(), "label", "slider", "Misc", "Sunflower's center (x-axis)", [0, 400]);
-  model.register$8$category$description$editorConfig("Center Y", new $.createSunflowerBinding_anon23(), new $.createSunflowerBinding_anon24(), "label", "slider", "Misc", "Sunflower's center (y-axis)", [0, 400]);
+  model.register$8$category$description$editorConfig("Center X", new $.createSunflowerBinding_anon19(), new $.createSunflowerBinding_anon20(), "label", "slider", "Misc", "Sunflower's center (x-axis)", [0, 400]);
+  model.register$8$category$description$editorConfig("Center Y", new $.createSunflowerBinding_anon21(), new $.createSunflowerBinding_anon22(), "label", "slider", "Misc", "Sunflower's center (y-axis)", [0, 400]);
   return model;
 };
 
@@ -11461,7 +11467,7 @@ $.PropertyEditorTextbox$ = function(controller) {
 $.PropertyGrid$ = function(elementClient) {
   var t1 = $.List_List(0, $.PropertyItemController);
   $.setRuntimeTypeInfo(t1, [$.PropertyItemController]);
-  t1 = new $.PropertyGrid(elementClient, null, null, null, null, null, null, null, t1, null);
+  t1 = new $.PropertyGrid(elementClient, null, null, null, null, null, null, null, null, t1, null);
   t1.PropertyGrid$1(elementClient);
   return t1;
 };
@@ -11486,7 +11492,7 @@ $.PropertyItem$ = function(name$, getValue, setValue, viewType, editorType, cate
 };
 
 $.PropertyItemController$ = function(grid, model, elementCellName, elementCellValue) {
-  var t1 = new $.PropertyItemController(grid, model, null, null, elementCellName, elementCellValue, null, "property-grid-item-name-selected");
+  var t1 = new $.PropertyItemController(grid, model, null, null, elementCellName, elementCellValue, null, "property-grid-item-name-selected", null);
   t1.PropertyItemController$4(grid, model, elementCellName, elementCellValue);
   return t1;
 };
@@ -11591,38 +11597,38 @@ $.PropertyViewLabel$ = function(controller, elementCell) {
   return t1;
 };
 
-$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
-$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 $.$$throw.call$1 = $.$$throw;
 $.$$throw.$name = "$$throw";
 $.Comparable_compare.call$2 = $.Comparable_compare;
 $.Comparable_compare.$name = "Comparable_compare";
+$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
+$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
 $.dynamicBind.call$4 = $.dynamicBind;
 $.dynamicBind.$name = "dynamicBind";
 $.invokeClosure.call$5 = $.invokeClosure;
 $.invokeClosure.$name = "invokeClosure";
-$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
-$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
+$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
+$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 $._nullDataHandler.call$1 = $._nullDataHandler;
 $._nullDataHandler.$name = "_nullDataHandler";
 $._nullErrorHandler.call$1 = $._nullErrorHandler;
 $._nullErrorHandler.$name = "_nullErrorHandler";
 $._nullDoneHandler.call$0 = $._nullDoneHandler;
 $._nullDoneHandler.$name = "_nullDoneHandler";
-$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
-$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
+$.typeNameInChrome.call$1 = $.typeNameInChrome;
+$.typeNameInChrome.$name = "typeNameInChrome";
 $.typeNameInFirefox.call$1 = $.typeNameInFirefox;
 $.typeNameInFirefox.$name = "typeNameInFirefox";
 $._getShapeTypes.call$0 = $._getShapeTypes;
 $._getShapeTypes.$name = "_getShapeTypes";
-$.typeNameInChrome.call$1 = $.typeNameInChrome;
-$.typeNameInChrome.$name = "typeNameInChrome";
-$.typeNameInSafari.call$1 = $.typeNameInSafari;
-$.typeNameInSafari.$name = "typeNameInSafari";
 $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
+$.typeNameInSafari.call$1 = $.typeNameInSafari;
+$.typeNameInSafari.$name = "typeNameInSafari";
 $.typeNameInOpera.call$1 = $.typeNameInOpera;
 $.typeNameInOpera.$name = "typeNameInOpera";
+$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
+$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
 $.constructorNameFallback.call$1 = $.constructorNameFallback;
 $.constructorNameFallback.$name = "constructorNameFallback";
 Isolate.$finishClasses($$);
@@ -11679,22 +11685,22 @@ $.scaleFactor = 4;
 $.phiIndex = 5;
 $.title = "Sunflower";
 $.seedRadius = 3;
-$.Element_changeEvent = Isolate.$isolateProperties.CONSTANT9;
 $.Element_blurEvent = Isolate.$isolateProperties.CONSTANT8;
+$.Element_changeEvent = Isolate.$isolateProperties.CONSTANT9;
+$.Element_clickEvent = Isolate.$isolateProperties.CONSTANT14;
 $.seedStrokeWidth = 1.5;
 $.Element_contextMenuEvent = Isolate.$isolateProperties.CONSTANT13;
 $.seedType = "Circle";
 $.background = null;
 $.backgroundImage = null;
-$.Element_clickEvent = Isolate.$isolateProperties.CONSTANT14;
 $.centerX = 200;
 $.centerY = 200;
 $.Element_keyDownEvent = Isolate.$isolateProperties.CONSTANT7;
 $.Element_loadEvent = Isolate.$isolateProperties.CONSTANT6;
 $.Element_mouseDownEvent = Isolate.$isolateProperties.CONSTANT12;
 $.Element_mouseMoveEvent = Isolate.$isolateProperties.CONSTANT10;
-$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT4;
 $.Element_mouseUpEvent = Isolate.$isolateProperties.CONSTANT11;
+$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT4;
 $._HashMapImpl__INITIAL_CAPACITY = 8;
 $.ReceivePortImpl__nextFreeId = 1;
 $._Sort__INSERTION_SORT_THRESHOLD = 32;
@@ -11759,9 +11765,6 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, 'seedColor', 'seedColor', 'get$seedColor', function() {
-  return $.SunColor$(32, 255, 192);
-});
 Isolate.$lazy($, 'sunflowerProperties', 'sunflowerProperties', 'get$sunflowerProperties', function() {
   return $.createSunflowerBinding();
 });

@@ -26,6 +26,9 @@ class PropertyItemController {
   /** The CSS selector to apply on the selected name element */
   final String selectedCssClass = "property-grid-item-name-selected";
   
+  /** Value before the edit was started.  This is passed to the listener when the edit operation completes */
+  var valueBeforeEdit;
+  
   PropertyItemController(this.grid, this.model, this.elementCellName, this.elementCellValue) {
     view = PropertyItemViewFactory.create(this, model.viewType, elementCellValue);
     if (model.editorType != null) {
@@ -48,11 +51,6 @@ class PropertyItemController {
     }
   }
   
-  void onViewClicked() {
-    if (editor != null) {
-      editor.showEditor();
-    }
-  }
   
   void setSelected(bool selected) {
     this.selected = selected;
@@ -73,11 +71,23 @@ class PropertyItemController {
     view.refresh();
     grid.onPropertyChanged(this);
   }
+
+  void onViewClicked() {
+    if (editor != null) {
+      valueBeforeEdit = model.getValue();
+      editor.showEditor();
+    }
+  }
   
   void finishEditing(value) {
     editor.hideEditor();
     model.setValue(value);
     view.refresh();
+    
+    if (grid._notifyPropertyEditComplete != null) {
+      var newValue = model.getValue();
+      grid._notifyPropertyEditComplete(this, valueBeforeEdit, newValue);
+    }
   }
   
   void refreshView() => view.refresh();
