@@ -10,6 +10,7 @@ import 'dart:html';
 import 'dart:math';
 import 'package:property_grid/property_grid.dart';
 import 'package:gradient_picker/gradient_picker.dart';  // Needed only if GradientValue data structure is used
+import 'package:color_picker/color_picker.dart';  // Needed only if ColorValue data structure is used
 
 const TAU = PI * 2;
 
@@ -60,7 +61,11 @@ main() {
 
 _initState() {
   // Create an initial gradient color
-  
+  flowerGradient.clear();
+  flowerGradient.addStopValue(new ColorValue.fromRGB(255, 0, 0), 0);
+  flowerGradient.addStopValue(new ColorValue.fromRGB(255, 255, 0), 0.33);
+  flowerGradient.addStopValue(new ColorValue.fromRGB(0, 255, 255), 0.66);
+  flowerGradient.addStopValue(new ColorValue.fromRGB(0, 0, 255), 1);
 }
 /**
  * Draw the complete figure for the current number of seeds.
@@ -85,14 +90,18 @@ void drawFrame(CanvasRenderingContext2D context) {
   context.restore();
   
   PHI = (sqrt(phiIndex) + 1) / 2;
+  final num maxRadius = sqrt(seeds) * scaleFactor;
 
   for (var i = 0; i < seeds; i++) {
     var theta = i * TAU / PHI;
     var r = sqrt(i) * scaleFactor;
     var x = centerX + r * cos(theta);
     var y = centerY - r * sin(theta);
+    
+    final radiusPercent = r / maxRadius;
+    var color = flowerGradient.getColor(radiusPercent).toString();
 
-    drawSeed(context, x, y);
+    drawSeed(context, x, y, color);
   }
 
 }
@@ -100,10 +109,10 @@ void drawFrame(CanvasRenderingContext2D context) {
 /**
  * Draw a small circle representing a seed centered at (x,y).
  */
-void drawSeed(CanvasRenderingContext2D context, num x, num y) {
+void drawSeed(CanvasRenderingContext2D context, num x, num y, String color) {
   context.beginPath();
   context.lineWidth = seedStrokeWidth;
-  context.fillStyle = seedColor.toRgba();
+  context.fillStyle = color;
   context.strokeStyle = strokeColor.toRgba();
   if (seedType == "Circle") {
     context.arc(x, y, seedRadius, 0, TAU, false);
@@ -165,7 +174,7 @@ PropertyGridModel createSunflowerBinding() {
       "label", "browse", category: "Appearence", description: "The background image");
 
   model.register("Gradient", () => flowerGradient, (GradientValue value) { flowerGradient = value; drawFrame(context); }, 
-      "gradient", "browse", category: "Appearence", description: "The flower's gradient color");
+      "gradient", "gradient", category: "Appearence", description: "The flower's gradient color");
 
   // Misc bindings
   model.register("Center X", () => centerX.toString(), (String value) { centerX = double.parse(value).toInt(); drawFrame(context); }, 

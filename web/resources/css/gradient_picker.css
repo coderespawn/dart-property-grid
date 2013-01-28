@@ -17,9 +17,7 @@
 }
 
 .gradient-picker-color-picker {
-  border: 1px solid black;
-  width: 144px;
   margin-top: 10px;
-  margin-left: 16px;
+  margin-left: 12px;
   display: none;
 }

@@ -34,6 +34,9 @@ class PropertyItemEditorFactory {
     else if (type == "color") {
       return new PropertyEditorColor(controller);
     }
+    else if (type == "gradient") {
+      return new PropertyEditorGradient(controller);
+    }
     else if (type == "browse") {
       return new PropertyEditorBrowse(controller);
     }

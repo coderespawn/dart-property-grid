@@ -8,6 +8,6 @@ author: Ali Akbar Vathi <ali.akbar@gmail.com>
 homepage: https://github.com/coderespawn/dart-property-grid
 dependencies:
   color_picker: ">=1.1.1 <2.0.0"
-  gradient_picker: ">=1.0.0 <2.0.0"
+  gradient_picker: ">=1.0.1 <2.0.0"
   browser: 0.3.1+1
   unittest: 0.3.1+1

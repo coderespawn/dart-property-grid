@@ -27,6 +27,7 @@ Optional `category` and `description` can be provided to display extra informati
 
  - label
  - color
+ - gradient
  
 `editorType` can have the following values:
 
@@ -34,19 +35,24 @@ Optional `category` and `description` can be provided to display extra informati
  - slider
  - spinner
  - color
+ - gradient
+ - browse
 
 The possible `editorConfig` for each `editorType` is:
 
- - **textbox**: N/A
  - **spinner**: A getter function that returns a List<String> for populating the spinner
  - **color**: A integer value specifying the size of the color picker (e.g. 128)
  - **slider**: `[minValue, maxValue, factor=1]`,  The first `minValue` parameter is the minimum value of the slider, followed by the `maxValue` maximum value parameter.  An optional third `factor` parameter can be passed in that divides the value in the slider. E.g. `[1104, 2722, 100]` would create a slider with the range of `(11.04, 27.22)`.  An input of `[10, 50]` would create a slider of range `10 to 50`
+ - **textbox**: N/A
+ - **gradient**: N/A
+ - **browse**: N/A
 
  
 ## Property Views
 
  - **Label View**: Display simple textual values ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/view_label.png)
  - **Color View**: Display a color value and its preview ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/view_color.png)
+ - **Gradient View**: Display a preview of the gradient color ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/view_gradient.png)
 
 ## Property Editors
 
@@ -62,10 +68,17 @@ The possible `editorConfig` for each `editorType` is:
  
  ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_spinner.png)
 
-
  - **Slider**: Display a slider to edit numeric values
  
  ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_slider.png)
+
+ - **Gradient**: Display a gradient editor
+ 
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_gradient.png)
+
+ - **File Upload Editor**: Display a File Upload button.  The choosing a file, the Html5 File object would be returned 
+ 
+ ![Label View](https://raw.github.com/coderespawn/dart-property-grid/master/doc/images/editor_browse.png)
 
 
 ## Demo

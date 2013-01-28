@@ -92,6 +92,9 @@ class PropertyGrid {
     final gridHeight = height - descriptionHeight;
     
     elementGridWrapper.style.height = "${gridHeight}px";
+    
+    // Notify all the views
+    
   }
 
   /** Binds the model to the grid */
@@ -135,6 +138,8 @@ class PropertyGrid {
     for (var item in itemControllers) {
       item.refreshView();
     }
+    
+    itemControllers.forEach((item) => item.view.onResized());
   }
   
   /** Whenever a property value is changed, this function is invoked */

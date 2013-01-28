@@ -11,6 +11,7 @@ part 'property_item_controller.dart';
 part 'property_item_view.dart';
 part 'property_item_editor.dart';
 part 'editors/editor_color.dart';
+part 'editors/editor_gradient.dart';
 part 'editors/editor_slider.dart';
 part 'editors/editor_spinner.dart';
 part 'editors/editor_textbox.dart';

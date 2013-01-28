@@ -13,6 +13,9 @@ abstract class IPropertyItemView {
   
   /** Dispose off the property item view */
   void dispose();
+
+  /** Notified by the grid when the grid is resized */
+  void onResized();
 }
 
 abstract class PropertyItemViewBase implements IPropertyItemView {
@@ -43,6 +46,9 @@ abstract class PropertyItemViewBase implements IPropertyItemView {
     controller.onViewClicked();
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  void onResized() {
   }
 }
 

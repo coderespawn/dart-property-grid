@@ -163,6 +163,20 @@
   margin: 5px;
 }
 
+.property-grid-item-editor-gradient-picker-host {
+  position: absolute;
+  width: auto;
+  z-index: 10000;
+  background-color: #ddd;
+  border: 1px solid #000;
+  padding: 0px;
+}
+
+.property-grid-item-editor-gradient-picker {
+  margin: 5px;
+}
+
+
 
 .property-grid-item-editor-browse-host {
   width: 100%;

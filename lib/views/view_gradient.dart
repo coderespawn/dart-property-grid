@@ -16,16 +16,13 @@ class PropertyViewGradient extends PropertyItemViewBase {
     elementView.nodes.add(gradientPreview);
 
     _initialize();
-    refresh();
+    onResized();
   }
   
   /** Refreshes the value in the view to reflect the value shown in the model */
   void refresh() {
     // Set the text
     GradientValue value = controller.model.getValue();
-    gradientPreview.style.width = "${elementView.clientWidth - 10}px";
-    gradientPreview.width = gradientPreview.clientWidth;
-    gradientPreview.height = gradientPreview.clientHeight;
     
     final context = gradientPreview.context2d;
     var canvasGradient = context.createLinearGradient(0, 0, gradientPreview.width, 0);
@@ -37,5 +34,12 @@ class PropertyViewGradient extends PropertyItemViewBase {
     context.fillStyle = canvasGradient;
     context.fillRect(0, 0, gradientPreview.width, gradientPreview.height);
     context.restore();
+  }
+  
+  void onResized() {
+    gradientPreview.style.width = "${elementView.clientWidth - 10}px";
+    gradientPreview.width = gradientPreview.clientWidth;
+    gradientPreview.height = gradientPreview.clientHeight;
+    refresh();
   }
 }
