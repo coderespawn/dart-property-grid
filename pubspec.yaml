@@ -1,5 +1,5 @@
 name:  property_grid
-version: 1.2.2
+version: 1.2.3
 description:  >
   A dart implementation of a .NET like property grid control.  Has support for various 
   value "views" and "editors" for visualizing and editing the values for property items
