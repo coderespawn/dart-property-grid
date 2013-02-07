@@ -98,7 +98,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   
   num _getSliderValue() {
     try {
-      if (slider.value == null) return null;
+      if (slider == null || slider.value == null) return null;
       num value = int.parse(slider.value.toString());
       return value / factor;
     } on Exception catch (e) {
