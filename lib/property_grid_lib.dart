@@ -68,6 +68,7 @@ class PropertyGrid {
   PropertyGrid(this.elementClient) {
     elementBase = new DivElement();
     elementBase.classes.add("property-grid-base");
+    elementBase.classes.add("property-grid-disable-selection");
     elementClient.nodes.add(elementBase);
     
     elementGridWrapper = new DivElement();

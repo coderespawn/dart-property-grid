@@ -30,9 +30,9 @@ class PropertyItemController {
   var valueBeforeEdit;
   
   PropertyItemController(this.grid, this.model, this.elementCellName, this.elementCellValue) {
-    view = PropertyItemViewFactory.create(this, model.viewType, elementCellValue);
+    view = PropertyItemViewFactory.instance.create(this, model.viewType, elementCellValue);
     if (model.editorType != null) {
-      editor = PropertyItemEditorFactory.create(this, model.editorType, model.editorConfig);
+      editor = PropertyItemEditorFactory.instance.create(this, model.editorType, model.editorConfig);
     }
     
     elementCellName.onClick.listen((e) => grid.onItemSelected(this));
@@ -77,6 +77,10 @@ class PropertyItemController {
       valueBeforeEdit = model.getValue();
       editor.showEditor();
     }
+  }
+  
+  void cancelEditing() {
+    editor.hideEditor();
   }
   
   void finishEditing(value) {

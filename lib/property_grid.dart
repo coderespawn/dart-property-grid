@@ -20,4 +20,5 @@ part 'utils/property_grid_utils.dart';
 part 'views/view_color.dart';
 part 'views/view_gradient.dart';
 part 'views/view_label.dart';
+part 'widgets/slider.dart';
 

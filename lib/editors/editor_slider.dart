@@ -7,7 +7,7 @@ part of property_grid;
  */
 class PropertyEditorSlider extends PropertyItemEditorBase {
   DivElement elementEditor;
-  InputElement slider;
+  Slider slider;
   bool editing = false;
   
   /** 
@@ -19,9 +19,9 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   
   PropertyEditorSlider(PropertyItemController controller) : super(controller)
   {
-    slider = new InputElement();
-    slider.type = "range";
-    slider.classes.add("property-grid-item-editor-slider");
+    slider = new Slider();
+//    slider.type = "range";
+    slider.element.classes.add("property-grid-item-editor-slider");
     
     // Set the slider configuration, if specified
     var sliderConfig = controller.model.editorConfig;
@@ -30,8 +30,8 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
       if (range.length >= 2) {
         num minValue = range[0];
         num maxValue = range[1];
-        slider.min = minValue.toString();
-        slider.max = maxValue.toString();
+        slider.min = minValue;
+        slider.max = maxValue;
         if (range.length >= 3) {
           factor = range[2];
         }
@@ -40,7 +40,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     
     // Wrap the slider in a background host element
     elementEditor = new DivElement();
-    elementEditor.nodes.add(slider);
+    elementEditor.nodes.add(slider.element);
     elementEditor.classes.add("property-grid-item-editor-slider-host");
     elementEditor.tabIndex = 1;
 
@@ -52,12 +52,13 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         _notifyFinishEditing();
       }
     });
-    slider.onChange.listen((e) {
+    
+    slider.onValueChanged = (sender, value) {
       num value =  _getSliderValue();
       if (value != null) {
         controller.requestValueChange(value.toString());
       }
-    });
+    };
   }
 
   void showEditor() {
@@ -99,8 +100,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
   num _getSliderValue() {
     try {
       if (slider == null || slider.value == null) return null;
-      num value = int.parse(slider.value.toString());
-      return value / factor;
+      return slider.value / factor;
     } on Exception catch (e) {
       return 0;
     }
@@ -108,6 +108,6 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
 
   void _setSliderValue(String valueText) {
     var value = double.parse(valueText);
-    slider.value = (value * factor).toInt().toString();
+    slider.value = (value * factor).toInt();
   }
 }

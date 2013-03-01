@@ -52,11 +52,38 @@ abstract class PropertyItemViewBase implements IPropertyItemView {
   }
 }
 
+abstract class IPropertyItemViewFactory {
+  IPropertyItemView create(PropertyItemController controller, String type, Element elementCell);
+}
 
-class PropertyItemViewFactory {
-  static IPropertyItemView create(PropertyItemController controller, String type, Element elementCell) {
+class PropertyItemViewFactory implements IPropertyItemViewFactory {
+
+  static IPropertyItemViewFactory _instance = null;
+  static IPropertyItemViewFactory get instance {
+    if (_instance == null) {
+      _instance = new PropertyItemViewFactory();
+    }
+    return _instance;
+  }
+
+  Map<String, IPropertyItemViewFactory> customFactories = new Map<String, IPropertyItemViewFactory>();
+  void registerFactory(String type, IPropertyItemViewFactory factory) {
+    customFactories[type] = factory;
+  }
+  
+  
+  IPropertyItemView create(PropertyItemController controller, String type, Element elementCell) {
+    // Check if we have a custom factory to instantiate the type
+    if (customFactories.containsKey(type)) {
+      final factory = customFactories[type];
+      return factory.create(controller, type, elementCell);
+    }
+    
     if (type == "label") {
       return new PropertyViewLabel(controller, elementCell);
+    } 
+    else if (type == "label_short") {
+      return new PropertyViewLabelShort(controller, elementCell);
     } 
     else if (type == "color") {
       return new PropertyViewColor(controller, elementCell);

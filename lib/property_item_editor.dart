@@ -17,8 +17,32 @@ abstract class PropertyItemEditorBase implements IPropertyItemEditor {
   int get gridScrollTop => controller.grid.elementGridWrapper.scrollTop;
 }
 
-class PropertyItemEditorFactory {
-  static IPropertyItemEditor create(PropertyItemController controller, String type, var editorConfig) {
+abstract class IPropertyItemEditorFactory {
+  IPropertyItemEditor create(PropertyItemController controller, String type, var editorConfig);
+}
+
+class PropertyItemEditorFactory implements IPropertyItemEditorFactory {
+  
+  static PropertyItemEditorFactory _instance = null;
+  static PropertyItemEditorFactory get instance {
+    if (_instance == null) {
+      _instance = new PropertyItemEditorFactory();
+    }
+    return _instance;
+  }
+  
+  Map<String, IPropertyItemEditorFactory> customFactories = new Map<String, IPropertyItemEditorFactory>();
+  void registerFactory(String type, IPropertyItemEditorFactory factory) {
+    customFactories[type] = factory;
+  }
+  
+  IPropertyItemEditor create(PropertyItemController controller, String type, var editorConfig) {
+    // Check if we have a custom factory to instantiate the type
+    if (customFactories.containsKey(type)) {
+      final factory = customFactories[type];
+      return factory.create(controller, type, editorConfig);
+    }
+    
     if (type == null) {
       return new DummyPropertyItemEditor();
     }
