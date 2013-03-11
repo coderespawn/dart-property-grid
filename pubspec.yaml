@@ -1,5 +1,5 @@
 name: property_grid
-version: 1.2.4
+version: 1.2.5
 author: Ali Akbar Vathi <ali.akbar@gmail.com>
 description: A dart implementation of a .NET like property grid control.  Has support for various  value "views" and "editors" for visualizing and editing the values for property items and is extensible with custom view and editor factories
 homepage: https://github.com/coderespawn/dart-property-grid

@@ -25,9 +25,9 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
     
     // Set the slider configuration, if specified
     var sliderConfig = controller.model.editorConfig;
-    if (sliderConfig != null && sliderConfig is List<num>) {
+    if (sliderConfig != null) {
       List<num> range = sliderConfig;
-      if (range.length >= 2) {
+      if (range != null && range.length >= 2) {
         num minValue = range[0];
         num maxValue = range[1];
         slider.min = minValue;
@@ -37,7 +37,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         }
       }
     }
-    
+
     // Wrap the slider in a background host element
     elementEditor = new DivElement();
     elementEditor.nodes.add(slider.element);
@@ -52,7 +52,7 @@ class PropertyEditorSlider extends PropertyItemEditorBase {
         _notifyFinishEditing();
       }
     });
-    
+
     slider.onValueChanged = (sender, value) {
       num value =  _getSliderValue();
       if (value != null) {
