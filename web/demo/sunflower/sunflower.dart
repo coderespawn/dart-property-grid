@@ -49,12 +49,12 @@ var sunflowerProperties = createSunflowerBinding();
 
 main() {
   _initState();
-  var propertyGrid = new PropertyGrid(query("#my_property_grid"));
+  var propertyGrid = new PropertyGrid(querySelector("#my_property_grid"));
   propertyGrid.model = sunflowerProperties;
 
-  CanvasElement canvas = query("#canvas");
+  CanvasElement canvas = querySelector("#canvas");
   centerX = centerY = MAX_D / 2;
-  context = canvas.context2d;
+  context = canvas.context2D;
 
   drawFrame(context);
 }
@@ -77,7 +77,7 @@ void drawFrame(CanvasRenderingContext2D context) {
   if (backgroundImage != null) {
     context.save();
     context.fillStyle = "transparent";
-    context.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 
+    context.drawImageScaledFromSource(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 
         0, 0, context.canvas.width, context.canvas.height);
     context.restore();
   }

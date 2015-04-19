@@ -14,7 +14,7 @@
 .color-picker-hue-slider {
   cursor: crosshair;
   border: 1px solid black;
-  margin-left: 5px;
+  margin-left: 0px;
   float: left;
 }
 

@@ -24,7 +24,7 @@ class PropertyViewGradient extends PropertyItemViewBase {
     // Set the text
     GradientValue value = controller.model.getValue();
     
-    final context = gradientPreview.context2d;
+    final context = gradientPreview.context2D;
     var canvasGradient = context.createLinearGradient(0, 0, gradientPreview.width, 0);
     value.stops.forEach((stop) {
       canvasGradient.addColorStop(stop.location, stop.color.toString());

@@ -61,8 +61,8 @@ class Slider {
     final containerLeft = rect.left + scrollLeft;
     final containerTop = rect.left + scrollTop;
     var containerWidth = rect.width;
-    var x = e.pageX - containerLeft;
-    var y = e.pageY - containerTop;
+    var x = e.page.x - containerLeft;
+    var y = e.page.y - containerTop;
     if (x < 0) x = 0;
     if (x > containerWidth) x = containerWidth;
     
